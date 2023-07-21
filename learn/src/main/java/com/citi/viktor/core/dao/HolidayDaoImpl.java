@@ -1,23 +1,25 @@
 package com.citi.viktor.core.dao;
 
-//help to add annotations for the  dao class
 import com.citi.viktor.core.entity.Holiday;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
+
 import org.springframework.stereotype.Repository;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 //help to add the  repository annotation
 @Repository
 //help to add the  dao class
-public class HolidayDaoImpl extends HolidayDao{
+public class HolidayDaoImpl implements HolidayDao{
     //define a  static  final string  for  the  csv file path C:\holiday.csv
     private static final String CSV_FILE_PATH = "C:\\holiday.csv";
-    public List<Holiday> getHolidays() {
+    public List<Holiday> getHolidays() throws Exception {
         //help  to get all the  holidays  from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -29,7 +31,7 @@ public class HolidayDaoImpl extends HolidayDao{
         return holidays;
     }
 
-    public void addHoliday(Holiday holiday) {
+    public void addHoliday(Holiday holiday)  throws Exception {
         //help  to add the  holiday  to the  csv file  using the  CSVWriter class
         String[] holidayData = {holiday.getCountryCode(), holiday.getCountryDesc(), holiday.getHolidayDate(), holiday.getHolidayName()};
         // check if holiday already exists with the same  country code and holiday name
@@ -42,7 +44,7 @@ public class HolidayDaoImpl extends HolidayDao{
         csvWriter.close();
     }
 
-    public void deleteHoliday(String holidayName) {
+    public void deleteHoliday(String holidayName) throws Exception {
         //help to  delete the  holiday  from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -57,7 +59,7 @@ public class HolidayDaoImpl extends HolidayDao{
     }
 
 
-    public void updateHoliday(Holiday holiday) {
+    public void updateHoliday(Holiday holiday) throws Exception {
         //help to  update the  holiday  from the  csv file  using the  CSVWriter class by country code and holiday name
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -74,7 +76,7 @@ public class HolidayDaoImpl extends HolidayDao{
     }
 
 
-    public List<Holiday> getHolidayByCountryCode(String countryCode) {
+    public List<Holiday> getHolidayByCountryCode(String countryCode) throws Exception {
         //help to  get the  holiday  from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -88,7 +90,7 @@ public class HolidayDaoImpl extends HolidayDao{
         return holidays;
     }
 
-    public List<Holiday> getHolidayByCountryDesc(String countryDesc) {
+    public List<Holiday> getHolidayByCountryDesc(String countryDesc) throws Exception {
         //help to  get the  holiday by  countryDesc from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -102,7 +104,7 @@ public class HolidayDaoImpl extends HolidayDao{
         return holidays;
     }
 
-    public List<Holiday> getHolidayByHolidayDateRange(String countryCode,String fromHolidayDate, String toHolidayDate) {
+    public List<Holiday> getHolidayByHolidayDateRange(String countryCode,String fromHolidayDate, String toHolidayDate) throws Exception {
         //help to get  the  holiday by countryCode and holidayDate range from the  csv file  using the  CSVWriter class, include  the fromHolidayDate and toHolidayDate
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -116,7 +118,7 @@ public class HolidayDaoImpl extends HolidayDao{
         return holidays;
     }
 
-    public List<Holiday> getHolidayByHolidayName(String holidayName) {
+    public List<Holiday> getHolidayByHolidayName(String holidayName) throws Exception {
         //help to  get the  holiday by  holidayName from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
@@ -130,7 +132,7 @@ public class HolidayDaoImpl extends HolidayDao{
         return holidays;
     }
 
-    public Holiday getHolidayByCountryCodeAndHolidayName(String countryCode, String holidayName) {
+    public Holiday getHolidayByCountryCodeAndHolidayName(String countryCode, String holidayName) throws Exception {
         //help to  get the  holiday  from the  csv file  using the  CSVWriter class
         CSVReader csvReader = new CSVReader(new FileReader(CSV_FILE_PATH));
         List<String[]> allData = csvReader.readAll();
